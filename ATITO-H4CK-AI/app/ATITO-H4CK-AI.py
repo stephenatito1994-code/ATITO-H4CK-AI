@@ -21,6 +21,7 @@ solution-oriented outputs with precision and authority — making it an indispen
 accuracy, and strategic depth.
 """
 
+
 # --- Dependency Check ---
 import pkg_resources
 import sys
@@ -29,7 +30,7 @@ import subprocess
 try:
     with open('requirements.txt') as f:
         requirements = [line.strip() for line in f if line.strip() and not line.startswith('#')]
-    pkg_resources.require(requirements)
+    pkg_resources.require(requirements) # Check if requirements are met
 except (pkg_resources.DistributionNotFound, pkg_resources.VersionConflict) as e:
     print(f"Missing or conflicting dependencies: {e}", file=sys.stderr)
     print("Attempting to install missing packages...", file=sys.stderr)
