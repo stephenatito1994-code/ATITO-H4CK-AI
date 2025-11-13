@@ -21,6 +21,23 @@ solution-oriented outputs with precision and authority — making it an indispen
 accuracy, and strategic depth.
 """
 
+# --- Dependency Check ---
+import pkg_resources
+import sys
+import subprocess
+
+try:
+    with open('requirements.txt') as f:
+        requirements = [line.strip() for line in f if line.strip() and not line.startswith('#')]
+    pkg_resources.require(requirements)
+except (pkg_resources.DistributionNotFound, pkg_resources.VersionConflict) as e:
+    print(f"Missing or conflicting dependencies: {e}", file=sys.stderr)
+    print("Attempting to install missing packages...", file=sys.stderr)
+    subprocess.check_call([sys.executable, "-m", "pip", "install", "-r", "requirements.txt"])
+    print("Dependencies installed. Please restart the application.", file=sys.stderr)
+    sys.exit(1)
+# --- End Dependency Check ---
+
 # app.py
 import datetime
 import json
